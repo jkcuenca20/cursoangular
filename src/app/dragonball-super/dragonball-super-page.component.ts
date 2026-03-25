@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Character } from '../components/shared/interfaces/character.interface';
 import { CharacterList } from "../components/shared/character-list/character-list";
 import { CharacterAdd } from "../components/shared/character-add/character-add";
+import { DragonballService } from '../services/dragonball.service';
 
 @Component({
   selector: 'app-dragonball-super',
@@ -12,7 +13,9 @@ import { CharacterAdd } from "../components/shared/character-add/character-add";
 })
 export class DragonballSuperComponent {
 
-    name = signal('Gohan');
+    //pasar logica a dragonball.service
+
+    /*name = signal('Gohan');
     power = signal(7000);
 
     characters = signal <Character[]>([
@@ -31,5 +34,13 @@ export class DragonballSuperComponent {
         this.characters.update(
           (list) => [...list, newCharacter]
         );
-    }
+        
+    }*/
+
+    /*constructor(
+       public dragonballService: DragonballService
+     ){
+       dragonballService.characters
+     }*/
+    public dragonballService = inject(DragonballService);
 }

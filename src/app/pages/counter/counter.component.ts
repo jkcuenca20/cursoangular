@@ -15,6 +15,7 @@ import { Component } from '@angular/core';
     button {
     padding: 5px;
     margin: 5px 10px;
+    width: auto;
     } `
 })
 
