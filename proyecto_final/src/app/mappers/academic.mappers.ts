@@ -34,9 +34,15 @@ export function mapCategoryApiToView(category: CategoryApi): CategoryView {
     /*
      * TODO estudiante:
      * Cambia este formato si quieres mostrar fecha con hora o con locale especifico.
-     * Pista: prueba toLocaleDateString('es-EC') o Intl.DateTimeFormat.
+     * Pista: prueba toLocaleDateString('es-EC') ok
+     * o Intl.DateTimeFormat.
      */
-    createdAtLabel: new Date(category.created_at).toLocaleDateString(),
+    //createdAtLabel: new Date(category.created_at).toLocaleDateString(),
+    createdAtLabel: new Date(category.created_at).toLocaleDateString('es-EC', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
   };
 }
 
@@ -50,23 +56,27 @@ export function mapProductApiToView(product: ProductApi): ProductView {
      * Completa esta transformacion.
      *
      * Requisito:
-     * - Si product.stock es 0, mostrar "Sin stock".
+     * - Si product.stock es 0, mostrar "Sin stock". ok
      * - Si product.stock es mayor a 0, mostrar "<cantidad> unidades".
      * - Si product.stock es menor a 5, mostrar ademas una advertencia como
      *   "Quedan pocas unidades".
      *
      * Ahora se deja un texto temporal para que la pantalla compile.
      */
-    stockLabel: 'TODO: calcular stock',
+
+     stockLabel: product.stock === 0
+      ? 'Sin stock'
+      : `${product.stock} unidades${product.stock < 5 ? ' - Quedan pocas unidades' : ''}`,  
+      
     /*
      * TODO estudiante:
-     * Reemplaza este texto por product.category_name.
+     * Reemplaza este texto por product.category_name. ok
      * Este TODO sirve para practicar remapeo snake_case -> camelCase.
      *
      * Criterio de aceptacion:
      * - En la pagina Servicios HTTP ya no debe aparecer "TODO: mapear categoria".
      */
-    categoryName: 'TODO: mapear categoria',
+    categoryName: product.category_name,
   };
 }
 
@@ -75,10 +85,10 @@ export function mapStudentApiToView(student: StudentApi): StudentView {
     id: student.id,
     /*
      * TODO estudiante:
-     * Prueba cambiar el orden a "Apellido, Nombre".
+     * Prueba cambiar el orden a "Apellido, Nombre". ok
      * Tambien puedes normalizar espacios si el backend enviara valores con espacios extra.
      */
-    fullName: `${student.first_name} ${student.last_name}`,
+    fullName: `${student.last_name}, ${student.first_name}`,
     email: student.email,
     active: student.active,
     activeLabel: student.active ? 'Activo' : 'Inactivo',
@@ -101,11 +111,11 @@ export function mapTaskApiToView(task: TaskApi): TaskView {
      * Requisito:
      * - Si task.due_date existe, mostrar una fecha legible.
      * - Si no existe, mostrar "Sin fecha".
-     * - El formato recomendado para Ecuador es es-EC.
+     * - El formato recomendado para Ecuador es es-EC. ok
      *
      * Ahora se deja parcialmente resuelto para que la app compile.
      */
-    dueDateLabel: task.due_date ? 'TODO: formatear fecha' : 'Sin fecha',
+    dueDateLabel: task.due_date ? new Date(task.due_date).toLocaleDateString('es-EC') : 'Sin fecha',
   };
 }
 
@@ -130,9 +140,9 @@ export function mapTaskPriorityToLabel(priority: TaskPriority): string {
    * - No se debe cambiar el union type TaskPriority.
    */
   const labels: Record<TaskPriority, string> = {
-    low: 'Baja',
-    medium: 'Media',
-    high: 'Alta',
+    low: 'Baja - puede esperar',
+    medium: 'Media - prioridad normal',
+    high: 'Alta - es urgente',
   };
 
   return labels[priority];

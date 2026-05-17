@@ -50,7 +50,7 @@ export class FormsPage {
   readonly taskForm = new FormGroup<TaskForm>({
     title: new FormControl(this.draft.title, {
       nonNullable: true,
-      validators: [Validators.required],
+      validators: [Validators.required, Validators.minLength(3)],
     }),
     description: new FormControl(this.draft.description, {
       nonNullable: true,

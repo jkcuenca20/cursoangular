@@ -82,6 +82,8 @@ export class AcademicApiService {
        * Pista:
        * tap((response) => console.log('Respuesta cruda students:', response))
        */
+
+      tap((response) => console.log('Respuesta cruda students jk:', response)),
       map((response) => response.data.map(mapStudentApiToView)),
     );
   }

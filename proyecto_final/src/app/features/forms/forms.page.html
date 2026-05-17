@@ -30,6 +30,10 @@
       <p class="error">El titulo es obligatorio.</p>
     }
 
+    @if (taskForm.controls.title.touched && taskForm.controls.title.hasError('minlength')) {
+      <p class="error">El titulo debe tener minimo 3 caracteres.</p>
+    }
+
     <!--
       TODO estudiante:
       Cuando agregues Validators.minLength(3), muestra aqui un mensaje si el titulo es muy corto.

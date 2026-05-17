@@ -59,10 +59,13 @@
   @if (tasks$ | async; as tasks) {
     <ul>
       @for (task of tasks; track task.id) {
-        <li>{{ task.title }} - {{ task.statusLabel }} - {{ task.studentLabel }}</li>
+        <li>{{ task.title }} - {{ task.statusLabel }} 
+          - {{ task.studentLabel }}
+          - {{ task.dueDateLabel }}
+        </li>
         <!--
           TODO estudiante:
-          Agrega task.dueDateLabel cuando completes el mapper de fecha.
+          OKAgrega task.dueDateLabel cuando completes el mapper de fecha.
         -->
       }
     </ul>
